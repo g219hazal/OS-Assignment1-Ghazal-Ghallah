@@ -3,6 +3,8 @@ import java.util.Queue;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 // ANSI Color Codes for enhanced terminal output
 class Colors {
@@ -31,6 +33,9 @@ class Process implements Runnable {
     private int remainingTime; // Time left for the process to finish its execution
     // Feature 1: Add a priority value for each process.
     private int priority;
+    // Feature 3: time tracking
+    private long arrivalTime;
+    private long finishTime;
 
     // Constructor to initialize the process with name, burst time, and time quantum
     public Process(String name, int burstTime, int timeQuantum) {
@@ -38,7 +43,7 @@ class Process implements Runnable {
         this.burstTime = burstTime;
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
-
+        this.arrivalTime = System.currentTimeMillis(); // Feature 3: time when process is created
     }
 
     // This method will be called when the thread for this process is started
@@ -92,6 +97,7 @@ class Process implements Runnable {
             System.out.println(Colors.BRIGHT_GREEN + "  ✓ " + Colors.BOLD + Colors.CYAN + name +
                     Colors.RESET + Colors.BRIGHT_GREEN + " finished execution!" +
                     Colors.RESET);
+            finishTime = System.currentTimeMillis(); // Feature 3: save finish time
         }
         System.out.println();
     }
@@ -120,6 +126,7 @@ class Process implements Runnable {
                     Colors.RESET + " [" + remainingTime + "ms]");
             Thread.sleep(remainingTime); // Run until completion
             remainingTime = 0; // Mark the process as completed
+            finishTime = System.currentTimeMillis(); // Feature 3: save finish time
             System.out.println(Colors.BRIGHT_GREEN + "  ✓ " + Colors.BOLD + Colors.CYAN + name +
                     Colors.RESET + Colors.BRIGHT_GREEN + " finished execution!" + Colors.RESET);
             System.out.println();
@@ -148,6 +155,16 @@ class Process implements Runnable {
 
     public int getPriority() {
         return priority;
+    }
+
+    // Feature 3: waiting time = (finish - arrival) - burst
+    public long getWaitingTime() {
+        return (finishTime - arrivalTime) - burstTime;
+    }
+
+    // Feature 3: turnaround time = waiting + burst
+    public long getTurnaroundTime() {
+        return getWaitingTime() + burstTime;
     }
 
     // Check if the process has finished (i.e., no remaining time)
@@ -182,6 +199,8 @@ public class SchedulerSimulation {
 
         // Map to associate each thread with its respective process object
         Map<Thread, Process> processMap = new HashMap<>();
+        // Feature 3: list to keep all processes for the final table
+        List<Process> allProcesses = new ArrayList<>();
 
         // Print simulation header with elegant formatting
         System.out.println("\n" + Colors.BOLD + Colors.BRIGHT_CYAN +
@@ -221,6 +240,7 @@ public class SchedulerSimulation {
 
             // Feature 1: Generate a random priority from 1 to 10.
             process.setPriority(1 + priorityRandom.nextInt(10));
+            allProcesses.add(process); // Feature 3
 
             // Add the process to the ready queue and the map
             addProcessToQueue(process, processQueue, processMap);
@@ -306,6 +326,15 @@ public class SchedulerSimulation {
                 Colors.RESET + "\n");
         // Feature 2: print total context switches
         System.out.println("Total context switches: " + contextSwitches);
+        // Feature 3: print summary table
+        System.out.println("\n--------------------------------------------------------------");
+        System.out.printf("%-10s %-15s %-15s %-15s%n", "Process", "Burst Time", "Waiting Time", "Turnaround Time");
+        System.out.println("--------------------------------------------------------------");
+        for (Process p : allProcesses) {
+            System.out.printf("%-10s %-15d %-15d %-15d%n",
+                    p.getName(), p.getBurstTime(), p.getWaitingTime(), p.getTurnaroundTime());
+        }
+        System.out.println("--------------------------------------------------------------");
     }
 
     // Method to add a process to the queue and map, while printing a "ready"
