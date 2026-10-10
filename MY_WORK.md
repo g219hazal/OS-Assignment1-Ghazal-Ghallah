@@ -29,11 +29,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | [Ghazal Ali Ghallah] |
+| **Student ID** | [446051422] |
+| **University Email** | 446051422@std.psau.edu.sa |
+| **GitHub Username** | [g219hazal] |
+| **Repository Link** | [https://github.com/g219hazal/OS-Assignment1-Ghazal-Ghallah] |
  
 ---
 
@@ -129,72 +129,86 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
+### Entry 1 - [October 3, 2026]
+**What I did**:Forked the starter repo and set my student ID
 
 **Details**:
+- Forked the starter repo and renamed it to OS-Assignment1-Ghazal-Ghallah
+- Changed the student ID to 446051422
+- Ran the program, I got 14 processes and the time quantum was 5000ms
+
 
 **Challenges**:
+No real challenges, the steps in the README were clear.
 
 **Solution**:
-
+None needed.
 **Time spent**:
+ 20 minutes
 
 ---
 
-### Entry 2 - [Date and Time]
+### Entry 2 - [October 6, 2026]
 **What I did**:
-
+ Feature 1 priority
 **Details**:
-
+- Added a priority variable in the Process class with get and set methods
+- Every process gets a random priority from 1 to 10
+- The priority shows when the process is added to the ready queue
+- The order of the queue did not change, it is still FIFO
 **Challenges**:
-
+No big challenges, I just had to read the code first to find where to add the priority and where to print it.
 **Solution**:
-
+I read the Process class and the addProcessToQueue() method before changing anything.
 **Time spent**:
-
+30 minutes
 ---
 
-### Entry 3 - [Date and Time]
+### Entry 3 - [ctober 8, 2026]
 **What I did**:
-
+Feature 2 context switch counter
 **Details**:
-
+- Added a static counter and increased it before currentThread.start()
+- Printed the total at the end, it was 24
 **Challenges**:
-
+I ran the program but the total context switches line was not showing.
 **Solution**:
-
+I didn't save the file before running. After saving with Ctrl+S it worked and showed 24. I turned on Auto Save so it doesn't happen again.
 **Time spent**:
-
+45 minutes
 ---
 
-### Entry 4 - [Date and Time]
+### Entry 4 - [October 9, 2026]
 **What I did**:
-
+Feature 3 waiting time table
 **Details**:
-
+- Saved the time when the process is created and when it finishes using System.currentTimeMillis()
+- Waiting time = finish - arrival - burst, turnaround = waiting + burst
+- Made a list of all processes so I can print the table at the end
 **Challenges**:
-
+Some numbers were a little bigger than I expected, like P3 waiting time was 10208 not 10000.
 **Solution**:
-
+I learned it's because printing and creating threads also take some time, so it adds a few milliseconds every switch.
 **Time spent**:
-
+30 minutes
 ---
 
-### Entry 5 - [Date and Time]
+### Entry 5 - [October 9, 2026]
 **What I did**:
-
+Started working on MY_WORK.md
 **Details**:
-
+- Filled my information
+- Wrote the development log
+- Read all the questions in Part B and Part C
 **Challenges**:
-
+At first I didn't understand what each part of the file needs.
 **Solution**:
-
+ I read the instructions in MY_WORK.md and the README again and did the parts one by one.
 **Time spent**:
-
+2 day
 ---
 
-### Entry 6 - [Optional - Date and Time]
+### Entry 6 - [October 10, 2026]
 **What I did**:
 
 **Details**:
@@ -237,7 +251,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[I learned that in this program every process runs inside its own thread, which is created with `new Thread(process)` in addProcessToQueue(). When the main thread calls `start()`, the process thread starts running its run() method. Then the main thread calls `join()`, so it stops and waits until the process finishes its quantum before taking the next one from the queue. I also learned that `Thread.sleep()` is used to act like the process is doing work on the CPU for some time. Seeing the output helped me understand that Round-Robin is fair, because a long process like P2 does not keep the CPU, it goes back to the end of the queue. Because of that, short processes like P3 and P5 finished early instead of waiting for the long ones.]
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -245,7 +259,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[The most challenging part for me was understanding the code at the beginning. The file is long and has two classes, so at first I didn't know which part does what and where I should add my changes. The colors and the progress bars also made the code look more complicated than it really is. I was also confused about how the main thread and the process threads work together, because they run at different times. It was hard to add the features before I understood the whole flow of the program. Once I understood the flow, adding the three features was much easier.]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -253,7 +267,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[First, I read the README and the code again slowly before changing anything. I followed what happens to one process, from addProcessToQueue() to start(), run() and join(). After that, I added one feature at a time and ran the program after every change to make sure it still worked. I also checked my results by calculating them by hand. For example, I counted the context switches from the output: 14 in the first round, 8 in the second and 2 in the last one, which gave 24 like my program. I also checked that P3 waited about 10000ms because it had to wait for P1 and P2.]
 
 ## Question 4: How can you apply multithreading concepts in real-world applications?
 
@@ -261,19 +275,19 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[I see multithreading every day on my laptop. When I have the browser, music and VS Code open at the same time, they all look like they are running together. But the CPU is actually switching between them very fast, and the operating system gives each one a small time slice. This is the same idea as the time quantum in my program. When one program's time is done, the CPU moves to the next one, just like a context switch in my simulation. This way no program takes the CPU forever, so the laptop stays responsive even with many apps open.]
 
 ### Optional: What would you like to learn more about?
 
-[Any topics related to threading or operating systems that you're curious about?]
+[Other scheduling algorithms like priority scheduling, and how threads can really run at the same time.]
 
 ### Optional: How confident do you feel about multithreading concepts now?
 
-[Beginner / Intermediate / Confident. What do you understand well? What needs more practice?]
+[Intermediate. I understand start(), join() and sleep() well, but I need more practice with threads running at the same time.]
 
 ### Optional: Feedback on the assignment
 
-[Any comments? Was it helpful? Too easy or hard? Suggestions?]
+[It was helpful because I could see Round-Robin working in the output instead of only reading about it.]
 
 ---
 
@@ -293,7 +307,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[A process is a running program that has its own memory, while a thread is a smaller unit that runs inside a process and shares its memory. In our code, the class called `Process` is only a simulated process, and the real thing that runs it is a Java thread created with `new Thread(process)` in addProcessToQueue(). The first difference is memory sharing: all the threads share the same objects, so the main thread can call `process.isFinished()` on the same object the thread changed, and they all use the same static `contextSwitches` counter. The second difference is creation cost: threads are cheap to create, my program made a new thread 24 times with no problem, while creating 24 real processes would need a separate memory space for each one and would be much slower.]
 
 ## Question 2: Ready Queue Behavior
 
@@ -305,15 +319,28 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[When a process does not finish within its time quantum, it gives up the CPU and is added again to the end of the ready queue. In my output, P2 has a burst time of 11700ms and the time quantum is 5000ms, so it could not finish in one turn. It ran three times (5000ms, 5000ms, then 1700ms) and was re-queued 2 times before it finished. This is important for fairness because a long process like P2 does not keep the CPU, so short processes like P3, P5 and P7 could finish early instead of waiting behind it.]
 
 Example from my output:
-```
+`P2 executing quantum [5000ms]
+P2 completed quantum 5000ms │ Overall progress: 42%
+Remaining time: 6700ms
+P2 yields CPU for context switch
+P2 [Priority: 9] added to ready queue │ Burst time: 11700ms
+
+P2 executing quantum [5000ms]
+Remaining time: 1700ms
+P2 yields CPU for context switch
+P2 [Priority: 9] added to ready queue │ Burst time: 11700ms
+
+P2 executing quantum [1700ms]
+Remaining time: 0ms
+P2 finished execution`
 [Paste a relevant snippet from your program output here showing a process being re-queued]
 ```
 
 **Explanation of example:**
-[Explain what is happening in the output snippet you pasted.]
+[In the first turn P2 used the full 5000ms and still had 6700ms left, so it went to the back of the queue. In the second turn it used another 5000ms and had 1700ms left, so it was re-queued again. In the third turn it only needed 1700ms, which is less than the quantum, so it finished. Between its turns, the other processes in the queue got their chance to run.]
 
 ## Question 3: Thread Lifecycle
 
@@ -323,15 +350,16 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences overall; one short explanation per state)*
 
-1. **New**: [When is P1 in the New state?]
+1. **New**: [P1's thread is in the New state when it is created with `new Thread(process)` in addProcessToQueue(), before the scheduler starts. It exists but is not running yet.]
 
-2. **Runnable**: [When does P1 become Runnable?]
+2. **Runnable**: [P1 becomes Runnable when the main thread calls `currentThread.start()` in the while loop. Now it is ready and waiting for the JVM to give it the CPU.]
 
-3. **Running**: [When is P1 Running?]
+3. **Running**: [P1 is Running when its run() method actually executes, which is when the output prints "P1 executing quantum [5000ms]".]
 
-4. **Waiting**: [When and why would a thread be Waiting?]
+4. **Waiting**: [Inside run(), P1's thread calls `Thread.sleep(stepTime)`, so it is in a timed waiting state while it simulates work. At the same time, the main thread is waiting because it called `currentThread.join()` and cannot continue until P1 finishes its quantum.]
 
-5. **Terminated**: [When is P1 Terminated?]
+5. **Terminated**: [P1's thread is Terminated when run() ends after the quantum. Because P1 still had 3363ms left, addProcessToQueue() created a new thread for it, and that second thread was terminated after "P1 finished execution!". So P1 actually used two different threads.
+]
 
 ## Question 4: Real-World Applications
 
@@ -341,32 +369,33 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences per example)*
 
-### Example 1 (operating-system level): [Name of scenario]
+### Example 1 (operating-system level): [CPU scheduling on a laptop]
 
 **Description**:
-[Describe the real-world scenario.]
+[On my laptop I usually have the browser, music and VS Code open at the same time. The CPU can only run one thing at a time on each core, so the operating system scheduler switches between these programs very fast. Each program is like a process in my simulation, and the small time it gets is like the time quantum.
+]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[Round-Robin is fair because every program gets a turn and no program can keep the CPU forever. It also keeps the laptop responsive, because even if one program is doing heavy work, the others still get CPU time quickly. It is also predictable, since each program knows it will get its turn after the others, like the ready queue in my code.]
 
-### Example 2: [Name of application/scenario]
+### Example 2: [ A web server]
 
 **Description**:
-[Describe the real-world scenario or application.]
+[A web server, like a university website, gets requests from many students at the same time. The server can use threads to handle the requests and switch between them. Each request is like a process, and the server gives each one a short time before moving to the next.]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[It is fair because every student gets served and one big request does not block everyone else. Small requests, like opening a page, finish fast, just like the short processes P3 and P5 in my output. This keeps the website responsive for all users.]
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. How start(), join() and sleep() control the thread lifecycle
+2. How Round-Robin re-queues unfinished processes to keep things fair
+3. The difference between a thread and a process, and why threads are cheaper
 
 **Concepts I need to study more:**
-1.
-2.
+1. How threads run truly at the same time on multiple cores
+2. Other scheduling algorithms like priority scheduling and SJF
 
 ---
 
